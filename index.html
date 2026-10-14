@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manga & Light Novel Reader</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --panel-color: #1e1e1e;
+            --text-color: #ffffff;
+            --accent-color: #ff4500;
+        }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            width: 100%;
+            background-color: var(--panel-color);
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        select, button {
+            background-color: #333;
+            color: white;
+            border: 1px solid #555;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: var(--accent-color);
+        }
+        .container {
+            margin-top: 80px;
+            width: 90%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        /* Режим Манги */
+        .manga-view img {
+            width: 100%;
+            max-width: 750px;
+            height: auto;
+            margin-bottom: 10px;
+            display: block;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        /* Режим Ранобэ */
+        .novel-view {
+            display: none;
+            background-color: var(--panel-color);
+            padding: 40px;
+            border-radius: 8px;
+            line-height: 1.8;
+            font-size: 18px;
+            text-align: justify;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        }
+        .active { display: block; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <select id="title-select" onchange="changeTitle()">
+            <option value="onepiece">Ван-Пис (Манга)</option>
+            <option value="naruto_novel">Наруто: История Итачи (Ранобэ)</option>
+        </select>
+        <select id="chapter-select">
+            <option>Глава 1: Накама</option>
+            <option>Глава 2: Новая сила</option>
+        </select>
+        <button onclick="toggleMode()">Переключить Манга/Ранобэ</button>
+    </header>
+
+    <div class="container">
+        <!-- Блок отображения Манги -->
+        <div id="manga-container" class="manga-view active">
+            <!-- ИИ-парсер будет вставлять сюда ссылки на картинки страниц -->
+            <img src="https://placeholder.com" alt="Page 1">
+            <img src="https://placeholder.com" alt="Page 2">
+        </div>
+
+        <!-- Блок отображения Ранобэ -->
+        <div id="novel-container" class="novel-view">
+            <h2>Глава 1: Ночь в Конохе</h2>
+            <p>Здесь будет отображаться текст новеллы. ИИ помог настроить шрифты и интервалы так, чтобы глаза читателя не уставали ночью. Текст автоматически подгружается из базы данных...</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleMode() {
+            const manga = document.getElementById('manga-container');
+            const novel = document.getElementById('novel-container');
+            manga.classList.toggle('active');
+            novel.classList.toggle('active');
+        }
+        function changeTitle() {
+            const select = document.getElementById('title-select');
+            alert('Вы переключились на: ' + select.options[select.selectedIndex].text);
+            // Тут ИИ свяжет переключение с базой данных
+        }
+    </script>
+</body>
+</html>
